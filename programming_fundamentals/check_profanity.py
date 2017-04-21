@@ -35,9 +35,16 @@ def check_profanity(text_to_check):
     req = urllib.request.Request(url + "?" + data)
     
     connection = urllib.request.urlopen(req)
-    output = connection.read()
-    print(output)
+    output = connection.read().decode("utf-8")
+    #print(output)
     connection.close()
+    
+    if (output == "true"):
+        print("Profanity Alert!!!")
+    elif (output == "false"):
+        print("This document has no curse words!")
+    else:
+        print("Could not scan the document properly.")
 
 
 read_text("movie_quotes.txt")
