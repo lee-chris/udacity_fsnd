@@ -4,6 +4,7 @@ Created on Apr 24, 2017
 @author: Chris
 '''
 import media
+import fresh_tomatoes
 
 toy_story = media.Movie("Toy Story",
                         "A story of a boy and his toys that come to life",
@@ -25,5 +26,9 @@ fight_club = media.Movie("Fight Club",
                          "https://images-na.ssl-images-amazon.com/images/M/MV5BZGY5Y2RjMmItNDg5Yy00NjUwLThjMTEtNDc2OGUzNTBiYmM1XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
                          "https://www.youtube.com/watch?v=BdJKm16Co6M")
 
-print(fight_club.storyline)
-fight_club.show_trailer()
+#print(fight_club.storyline)
+#fight_club.show_trailer()
+
+
+movies = [toy_story, avatar, fight_club]
+fresh_tomatoes.open_movies_page(movies)
