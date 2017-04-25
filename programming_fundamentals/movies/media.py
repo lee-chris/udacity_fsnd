@@ -6,10 +6,11 @@ Created on Apr 24, 2017
 import webbrowser
 
 class Movie():
+    """ This class provides a way to store movie related information """
     
-    '''
+    """
     Class variable used store list of ratings
-    '''
+    """
     VALID_RATINGS = ["G", "PG", "PG-13", "R"]
     
     def __init__(self, movie_title, movie_storyline, poster_image, trailer_youtube):
