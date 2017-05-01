@@ -2,12 +2,17 @@ p {
 	
 }
 
+.app {
+	display: flex;
+	display: -webkit-flex
+}
+
 .screenshot {
 	max-width: 460px;
 }
 
 .description {
-	max-width: 705px;
+	width: 705px;
 }
 
 * {
