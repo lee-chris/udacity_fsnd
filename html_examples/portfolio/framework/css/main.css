@@ -16,6 +16,10 @@
 	}
 }
 
+h1 {
+	font-family: 'Lato', sans-serif;
+}
+
 .grid {
     margin: 0 auto;
     max-width: 1200px;
