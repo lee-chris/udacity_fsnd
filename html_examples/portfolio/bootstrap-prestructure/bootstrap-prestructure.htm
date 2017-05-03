@@ -4,6 +4,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -16,7 +18,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-      <img class="img-responsive" src="./bootstrap-prestructure_files/1140x350">
+      <img class="img-responsive" src="./bootstrap-prestructure_files/1140x350" data-toggle="modal" data-target="#project1">
       </div>
     </div>
     <div class="row">
@@ -46,6 +48,24 @@
         <p><a href="http://github.com/">Link to project</a></p>
       </div>
     </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
+                </div>
+                <div class="modal-body">
+                    <img class="img-responsive" src="./bootstrap-prestructure_files/1140x350">
+                    This was my first project in this class. I learned a lot about HTML and CSS.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
   
