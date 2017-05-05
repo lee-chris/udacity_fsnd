@@ -395,4 +395,14 @@ footer a {
 	.weather {
 		width: 33.33%;
 	}
+	.recent-news {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.recent-news h2 {
+		width: 100%;
+	}
+	.news .snippet {
+		width: 50%;
+	}
 }
