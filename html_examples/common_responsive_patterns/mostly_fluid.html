@@ -14,10 +14,34 @@
     .red {background-color: #CC0000;}
     .orange {background-color: #CC8800;}
     
+    @media screen and (min-width: 450px) {
+    	.light-blue, .green {
+    		width: 50%;
+    	}
+    }
+    
+    @media screen and (min-width: 550px) {
+    	.dark-blue, .light-blue {
+    		width: 50%;
+    	}
+    	.green, .red, .orange {
+    		width: 33.33%;
+    	}
+    }
+    
+    @media screen and (min-width: 700px) {
+    	.container {
+    		width: 700px;
+    		margin-left: auto;
+    		margin-right: auto;
+    	}
+    }
+    
     </style>
   </head>
   <body>
     <h1>Mostly Fluid</h1>
+    <p>Similar to Column Drop but more grid like. In the final breakpoint, a whitespace margin is added to the grid.</p>
     <div class="container">
   	<div class="box dark-blue"></div>
   	<div class="box light-blue"></div>
