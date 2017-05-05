@@ -136,7 +136,10 @@ main {
  * Content
  *
  */
-
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 /*
  *
@@ -377,4 +380,19 @@ footer a {
   text-decoration: none;
   color: #333;
   padding: 1.5em;
+}
+
+@media screen and (min-width: 800px) {
+	.weather, .scores {
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	.top-news, .scores {
+		width: 33.33%;
+	}
+	.weather {
+		width: 33.33%;
+	}
 }
