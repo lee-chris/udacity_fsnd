@@ -7,19 +7,42 @@
     <style>
 
     div.container {width: 100%; display: flex; flex-wrap: wrap;}
-    .box {width: 100%; height: 100px;}
+    .box {width: 100%;}
     .dark-blue {background-color: #0000AA;}
     .light-blue {background-color: #0088FF;}
     .green {background-color: #008800;}
     .red {background-color: #CC0000;}
     .orange {background-color: #CC8800;}
     
+    @media screen and (min-width: 500px) {
+    	.dark-blue {
+    		width: 50%;
+    	}
+    	#container2 {
+    		width: 50%;
+    	}
+    }
+    
+    @media screen and (min-width: 600px) {
+    	.dark-blue {
+    		width: 25%;
+    		order: 1;
+    	}
+    	#container2 {
+    		width: 50%;
+    	}
+    	.red {
+    		width: 25%;
+    		order: -1;x
+    	}
+    }
+    
     </style>
   </head>
   <body>
     <h1>Layout Shifter</h1>
     <p>As the boxes shift around, the order they are displayed on the page changes as well.</p>
-    <div class="container">
+    <div class="container" style="height: 800px">
     	<div class="box dark-blue"></div>
     	<div class="container" id="container2">
     		<div class="box light-blue"></div>
