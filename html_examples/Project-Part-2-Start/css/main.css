@@ -1,3 +1,15 @@
+@import url(http://weloveiconfonts.com/api/?family=fontelico|zocial);
+
+/* fontelico */
+[class*="fontelico-"]:before {
+  font-family: 'fontelico', sans-serif;
+}
+
+/* zocial */
+[class*="zocial-"]:before {
+  font-family: 'zocial', sans-serif;
+}
+
 article {
   margin: 0 auto;
   max-width: 50em;
