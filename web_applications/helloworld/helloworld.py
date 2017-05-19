@@ -40,6 +40,10 @@ class TestHandler(webapp2.RequestHandler):
     def get(self):
         q = self.request.get("q")
         self.response.out.write(q)
+        
+        # It's possible to print out the request for debugging
+        #self.response.headers["Content-Type"] = "text/plain"
+        #self.response.out.write(self.request)
 
 
 app = webapp2.WSGIApplication([
