@@ -46,10 +46,24 @@ class TestHandler(webapp2.RequestHandler):
         #self.response.out.write(self.request)
 
 
+class SimpleLoginForm(webapp2.RequestHandler):
+    """Simple form that demos password input"""
+    
+    def get(self):
+        self.response.write("""
+            <form>
+                <input type="text" name="l">
+                <input type="password" name="p">
+                <input type="submit">
+            </form>
+        """)
+
+
 app = webapp2.WSGIApplication([
     ("/", MainPage),
     ("/search", Google),
     ("/input", SimpleForm),
-    ("/testForm", TestHandler)
+    ("/testForm", TestHandler),
+    ("/login", SimpleLoginForm)
 ], debug=True)
     
