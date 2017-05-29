@@ -76,7 +76,46 @@ class FormHandler(BaseHTTPRequestHandler):
         self.wfile.write(message.encode())
 
 
+class PRGHandler(BaseHTTPRequestHandler):
+    """Example of Post-Redirect-Get pattern"""
+    
+    i = 0
+    
+    def do_GET(self):
+        
+        self.send_response(200)
+        
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        
+        html = """
+            <html>
+                <body>
+                    <div>{i}</div>
+                    <form method="post">
+                        <div><input type="submit" value="Add 1"/></div>
+                    </form>
+                </body>
+            </html>
+            """
+        
+        self.wfile.write(html.format(html, i=PRGHandler.i).encode())
+    
+    def do_POST(self):
+        
+        # increment static member variable
+        PRGHandler.i += 1
+        
+        # set redirect reponse code
+        self.send_response(303)
+        
+        # set redirect uri
+        self.send_header("Location", "/")
+        self.end_headers()
+
+
 if __name__ == "__main__":
+    
     server_address = ("", 8000) #Serve on all addresses, port 8000
-    httpd = HTTPServer(server_address, FormHandler)
+    httpd = HTTPServer(server_address, PRGHandler)
     httpd.serve_forever()
