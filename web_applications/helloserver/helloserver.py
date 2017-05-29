@@ -114,8 +114,79 @@ class PRGHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
 
+class BookmarkServer(BaseHTTPRequestHandler):
+    """This http request handler stores a dict of shortcut names to full urls.
+    
+    On a basic GET to / a simple form will be displayed to get the URL
+    and its shortcut. Then when the shortcut string is used as the path
+    to the web server, the user is redirected to the saved url.    
+    """
+    
+    bookmarks = {}
+    
+    def do_GET(self):
+        
+        path = self.path[1:]
+        
+        if (len(path) == 0):
+            
+            self.send_response(200)
+            
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            
+            html = """
+                <html>
+                    <body>
+                        <form method="post">
+                            <div>URL: <input name="url"/></div>
+                            <div>Shortcut: <input name="shortcut"/></div>
+                            <div><input type="submit" value="Submit"/></div>
+                        </form>
+                    </body>
+                </html>
+                """
+            
+            self.wfile.write(html.encode())
+        
+        else:
+            
+            # debugging
+            print(path + "=>" + BookmarkServer.bookmarks.get(path, ""))
+            
+            if path not in BookmarkServer.bookmarks:
+                
+                self.send_response(404)
+                
+            else:
+                
+                # Note: the url needs to include http: if it is going to
+                # another domain
+                self.send_response(301)
+                self.send_header("Location", BookmarkServer.bookmarks[path])
+                self.end_headers()
+    
+    def do_POST(self):
+        
+        length = int(self.headers.get("Content-length", 0))
+        data = self.rfile.read(length).decode()
+        query_string = urllib.parse.parse_qs(data)
+        
+        url = query_string["url"][0]
+        path = query_string["shortcut"][0]
+        
+        # add short to dict
+        BookmarkServer.bookmarks[path] = url
+        
+        # redirect to main form
+        self.send_response(303)
+        self.send_header("Location", "/")
+        self.end_headers()
+
+
+
 if __name__ == "__main__":
     
     server_address = ("", 8000) #Serve on all addresses, port 8000
-    httpd = HTTPServer(server_address, PRGHandler)
+    httpd = HTTPServer(server_address, BookmarkServer)
     httpd.serve_forever()
