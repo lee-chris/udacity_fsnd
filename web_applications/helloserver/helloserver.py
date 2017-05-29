@@ -1,6 +1,13 @@
+import threading
 import urllib.parse
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
+
+
+class ThreadHTTPServer(ThreadingMixIn, HTTPServer):
+    """This is an HTTPServer that supports thread-based concurrency."""
+
 
 class HelloHandler(BaseHTTPRequestHandler):
     """Simple example http handler"""
@@ -188,5 +195,5 @@ class BookmarkServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     
     server_address = ("", 8000) #Serve on all addresses, port 8000
-    httpd = HTTPServer(server_address, BookmarkServer)
+    httpd = ThreadHTTPServer(server_address, BookmarkServer)
     httpd.serve_forever()
