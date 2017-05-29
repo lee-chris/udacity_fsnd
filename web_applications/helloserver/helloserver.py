@@ -1,6 +1,7 @@
 import threading
 import urllib.parse
 
+from http.cookies import SimpleCookie, CookieError
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from socketserver import ThreadingMixIn
 
@@ -191,9 +192,60 @@ class BookmarkServer(BaseHTTPRequestHandler):
         self.end_headers()
 
 
+class CookieServer(BaseHTTPRequestHandler):
+    """Simple request handler that saves the user's name in a cookie."""
+    
+    def do_GET(self):
+        
+        html = """
+            <html>
+                <body>
+                    <div><h1>Hello {name}</h1></div>
+                    <form method="post">
+                        <div>What is your name? <input name="name"/></div>
+                        <div><input type="submit" value="Submit"/></div>
+                    </form>
+                </body>
+            </html>
+        """
+        
+        # Read cookie from request
+        cookie = SimpleCookie(self.headers["Cookie"]).get("name", None)
+        
+        if (cookie == None):
+            cookie_name = ""
+        else:
+            cookie_name = cookie.value
+        
+        self.send_response(200)
+        
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(html.format(html, name=cookie_name).encode())
+    
+    def do_POST(self):
+        
+        length = int(self.headers.get("Content-length", 0))
+        data = self.rfile.read(length).decode()
+        query_string = urllib.parse.parse_qs(data)
+        
+        # Get name from request
+        name = query_string["name"][0]
+        
+        # Save name value into cookie
+        cookie = SimpleCookie()
+        cookie["name"] = name
+        cookie["name"]["max-age"] = 600
+        cookie["name"]["httponly"] = True
+        
+        self.send_response(303)
+        self.send_header("Location", "/")
+        self.send_header("Set-Cookie", cookie["name"].OutputString())
+        self.end_headers()
+
 
 if __name__ == "__main__":
     
     server_address = ("", 8000) #Serve on all addresses, port 8000
-    httpd = ThreadHTTPServer(server_address, BookmarkServer)
+    httpd = ThreadHTTPServer(server_address, CookieServer)
     httpd.serve_forever()
