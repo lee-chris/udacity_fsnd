@@ -29,6 +29,9 @@ function loadData() {
             $('#nytimes-articles').append('<li class="article"><a href="' + docs[i].web_url + '">' + docs[i].headline.main + '</a><p>' + docs[i].snippet + '</p></li>');
         }
     
+    })
+    .error(function() {
+        $('#nytimes-header').html("Failed to load NY Times articles.");
     });
 
     return false;
