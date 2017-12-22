@@ -21,7 +21,7 @@ function loadData() {
     });
     $.getJSON(url, function(result) {
         
-        console.log(result);
+        // console.log(result);
         
         var docs = result.response.docs;
         
