@@ -1,14 +1,23 @@
-#cat {
-    position: absolute;
+.cat-container {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+}
+
+.cat {
     width: 100%;
     height: 100%;
     z-index: 0;
 }
 
-#count {
+.count, .name {
     position: absolute;
     z-index: 1;
     width: 100%;
     text-align: center;
     font-size: 3em;
+}
+
+.count {
+    padding-top: 1em;
 }
