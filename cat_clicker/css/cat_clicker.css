@@ -1,7 +1,6 @@
 .cat-container {
     display: inline-block;
     position: relative;
-    width: 50%;
 }
 
 .cat {
@@ -20,4 +19,27 @@
 
 .count {
     padding-top: 1em;
+}
+
+#container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#list-container {
+    display: inline-block;
+    height: 100%;
+    width: 24%;
+    vertical-align: top;
+}
+
+#list {
+    height: 100%;
+    width: 100%;
+}
+
+#main {
+    display: inline-block;
+    width: 75%;
 }
