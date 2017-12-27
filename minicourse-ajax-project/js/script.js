@@ -33,8 +33,32 @@ function loadData() {
     .error(function() {
         $('#nytimes-header').html("Failed to load NY Times articles.");
     });
+    
+    $.ajax({
+        url: "https://en.wikipedia.org/w/api.php",
+        data: {
+            action: "query",
+            format: "json",
+            callback: "wikipedia",
+            list: "search",
+            srsearch: $("#city").val(),
+            srprop: "",
+            srlimit: 10
+        },
+        dataType: "jsonp",
+        success: function(data) {
+            $("body").append("<script>" + data + "</script>");
+        }
+    });
 
     return false;
 };
+
+function wikipedia(data) {
+    var results = data.query.search;
+    for (var i = 0; i < results.length; i++) {
+        $("#wikipedia-links").append("<li><a href='http://en.wikipedia.org/w/index.php?curid=" + results[i].pageid + "'>" + results[i].title + "</a></li>");
+    }
+}
 
 $('#form-container').submit(loadData);
